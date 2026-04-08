@@ -5,6 +5,10 @@
 import { LitElement, html, css } from "lit";
 import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
 import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
+import "./game-of-throwers-website-about-screen.js";
+import "./game-of-throwers-website-home-screen.js";
+import "./game-of-throwers-website-schedule-screen.js";
+import "./game-of-throwers-website-team-screen.js";
 
 /**
  * `game-of-throwers-website`
@@ -20,25 +24,12 @@ export class GameOfThrowersWebsite extends DDDSuper(I18NMixin(LitElement)) {
 
   constructor() {
     super();
-    this.title = "";
-    this.t = this.t || {};
-    this.t = {
-      ...this.t,
-      title: "Title",
-    };
-    this.registerLocalization({
-      context: this,
-      localesPath:
-        new URL("./locales/game-of-throwers-website.ar.json", import.meta.url).href +
-        "/../",
-    });
   }
 
   // Lit reactive properties
   static get properties() {
     return {
       ...super.properties,
-      title: { type: String },
     };
   }
 
@@ -48,16 +39,50 @@ export class GameOfThrowersWebsite extends DDDSuper(I18NMixin(LitElement)) {
     css`
       :host {
         display: block;
-        color: var(--ddd-theme-primary);
-        background-color: var(--ddd-theme-accent);
+        width: 100%;
+        height: 125px;
+        background-color: black;
         font-family: var(--ddd-font-navigation);
       }
-      .wrapper {
-        margin: var(--ddd-spacing-2);
-        padding: var(--ddd-spacing-4);
+
+      .top-row-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
       }
-      h3 span {
-        font-size: var(--game-of-throwers-website-label-font-size, var(--ddd-font-size-s));
+      .home-image {
+        cursor: pointer;
+        width: auto;
+        height: 130px;
+        padding-left: 20px;
+      }
+      .home-image:hover {
+        filter: drop-shadow(0 0 5px gold);
+      }
+
+      .nav-buttons {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding-right: 100px;
+        gap: 50px;
+      }
+      .schedule-button,
+      .team-button,
+      .about-button {
+        cursor: pointer;
+        background-color: transparent;
+        color: white;
+        border: none;
+        height: 40px;
+        font-size: 30px;
+      }
+      .schedule-button:hover,
+      .team-button:hover,
+      .about-button:hover {
+        color: gold;
+        filter: drop-shadow(0 0 5px gold);
       }
     `];
   }
@@ -65,19 +90,24 @@ export class GameOfThrowersWebsite extends DDDSuper(I18NMixin(LitElement)) {
   // Lit render the HTML
   render() {
     return html`
-<div class="wrapper">
-  <h3><span>${this.t.title}:</span> ${this.title}</h3>
-  <slot></slot>
-</div>`;
+      <div class="top-row-wrapper">
+        <a href="/" title="Home Button">
+          <img class="home-image" src="/public/images/game-of-throws-png.jpg" alt="Game of Throwers Logo">
+        </a>
+        
+        <div class="nav-buttons">
+          <button class="schedule-button" title="Schedule Button">Schedule</button>
+          <button class="team-button" title="Team Button">Team</button>
+          <button class="about-button" title="About Button">About</button>
+        </div>
+      </div>
+
+      <div>
+        <game-of-throwers-website-home-screen></game-of-throwers-website-home-screen>
+      </div>
+  `;
   }
 
-  /**
-   * haxProperties integration via file reference
-   */
-  static get haxProperties() {
-    return new URL(`./lib/${this.tag}.haxProperties.json`, import.meta.url)
-      .href;
-  }
 }
 
 globalThis.customElements.define(GameOfThrowersWebsite.tag, GameOfThrowersWebsite);

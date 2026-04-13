@@ -9,6 +9,8 @@ import "./game-of-throwers-website-about-screen.js";
 import "./game-of-throwers-website-home-screen.js";
 import "./game-of-throwers-website-schedule-screen.js";
 import "./game-of-throwers-website-team-screen.js";
+import "./game-of-throwers-website-nav.js";
+import "./game-of-throwers-website-footer.js";
 
 /**
  * `game-of-throwers-website`
@@ -24,12 +26,21 @@ export class GameOfThrowersWebsite extends DDDSuper(I18NMixin(LitElement)) {
 
   constructor() {
     super();
+    this.currentScreen = 'home';
+
+    if (window.location.pathname === '/' || window.location.pathname === '') {
+      window.history.replaceState({}, '', '/game-of-throwers/home');
+    }
+    
+    this._handleRouteChange();
+    window.addEventListener('popstate', () => this._handleRouteChange());
   }
 
   // Lit reactive properties
   static get properties() {
     return {
       ...super.properties,
+      currentScreen: { type: String },
     };
   }
 
@@ -39,50 +50,7 @@ export class GameOfThrowersWebsite extends DDDSuper(I18NMixin(LitElement)) {
     css`
       :host {
         display: block;
-        width: 100%;
-        height: 125px;
-        background-color: black;
-        font-family: var(--ddd-font-navigation);
-      }
-
-      .top-row-wrapper {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-      }
-      .home-image {
-        cursor: pointer;
-        width: auto;
-        height: 130px;
-        padding-left: 20px;
-      }
-      .home-image:hover {
-        filter: drop-shadow(0 0 5px gold);
-      }
-
-      .nav-buttons {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        padding-right: 100px;
-        gap: 50px;
-      }
-      .schedule-button,
-      .team-button,
-      .about-button {
-        cursor: pointer;
-        background-color: transparent;
-        color: white;
-        border: none;
-        height: 40px;
-        font-size: 30px;
-      }
-      .schedule-button:hover,
-      .team-button:hover,
-      .about-button:hover {
-        color: gold;
-        filter: drop-shadow(0 0 5px gold);
+        min-height: 100vh;
       }
     `];
   }
@@ -90,22 +58,44 @@ export class GameOfThrowersWebsite extends DDDSuper(I18NMixin(LitElement)) {
   // Lit render the HTML
   render() {
     return html`
-      <div class="top-row-wrapper">
-        <a href="/" title="Home Button">
-          <img class="home-image" src="/public/images/game-of-throws-png.jpg" alt="Game of Throwers Logo">
-        </a>
-        
-        <div class="nav-buttons">
-          <button class="schedule-button" title="Schedule Button">Schedule</button>
-          <button class="team-button" title="Team Button">Team</button>
-          <button class="about-button" title="About Button">About</button>
-        </div>
-      </div>
+      <game-of-throwers-website-nav @navigate=${this._handleNavigation}></game-of-throwers-website-nav>
 
       <div>
-        <game-of-throwers-website-home-screen></game-of-throwers-website-home-screen>
+        ${this.currentScreen === 'home' ? html`<game-of-throwers-website-home-screen></game-of-throwers-website-home-screen>` : ''}
+        ${this.currentScreen === 'schedule' ? html`<game-of-throwers-website-schedule-screen></game-of-throwers-website-schedule-screen>` : ''}
+        ${this.currentScreen === 'team' ? html`<game-of-throwers-website-team-screen></game-of-throwers-website-team-screen>` : ''}
+        ${this.currentScreen === 'about' ? html`<game-of-throwers-website-about-screen></game-of-throwers-website-about-screen>` : ''}
       </div>
+
+      <game-of-throwers-website-footer></game-of-throwers-website-footer>
   `;
+  }
+
+  _handleNavigation(e) {
+    const screen = e.detail.screen;
+    this.currentScreen = screen;
+
+    const paths = {
+      home: '/game-of-throwers/home',
+      schedule: '/game-of-throwers/schedule',
+      team: '/game-of-throwers/team',
+      about: '/game-of-throwers/about'
+    };
+
+    window.history.pushState({}, '', paths[screen]);
+  }
+
+  _handleRouteChange() {
+    const path = window.location.pathname;
+    if (path.includes('/schedule')) {
+      this.currentScreen = 'schedule';
+    } else if (path.includes('/team')) {
+      this.currentScreen = 'team';
+    } else if (path.includes('/about')) {
+      this.currentScreen = 'about';
+    } else {
+      this.currentScreen = 'home';
+    }
   }
 
 }

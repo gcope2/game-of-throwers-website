@@ -43,20 +43,20 @@ export class GameOfThrowersWebsiteArrows extends DDDSuper(I18NMixin(LitElement))
 
       .back-wrapper {
         justify-content: left;
-        padding-left: 40px;
+        padding-left: var(--ddd-spacing-10);
       }
       .next-wrapper {
         justify-content: right;
-        padding-right: 40px;
+        padding-right: var(--ddd-spacing-10);
       }
 
       button {
         cursor: pointer;
-        background-color: transparent;
-        border: 4px solid black;
+        background-color: var(--ddd-theme-default-potential0);
+        border: solid black;
         font-weight: var(--ddd-font-weight-bold);
         border-radius: 50%;
-        font-size: 25px;
+        font-size: var(--ddd-font-size-xlarge);
         height: 40px;
         width: 40px;
       }

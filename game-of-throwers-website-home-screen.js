@@ -140,7 +140,7 @@ export class GameOfThrowersWebsiteHomeScreen extends DDDSuper(I18NMixin(LitEleme
         <h1 class="about-title">About Game of Throws</h1>
 
         <div class="about-row">
-          <img class="about-image" src="/public/images/game-of-throws-logo.jpg" alt="Game of Throwers Logo">
+          <img class="about-image" src="/images/game-of-throws-logo.jpg" alt="Game of Throwers Logo">
           
           <div class="about-text">
             <p>Game of Throws is a throws-only track & field club dedicated to the shot put, discus, hammer, and javelin. We bring together throwers of all ages and levels who want to get stronger, throw farther, and have a blast doing it.</p>

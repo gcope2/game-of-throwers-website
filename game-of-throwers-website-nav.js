@@ -89,7 +89,7 @@ export class GameOfThrowersWebsiteNav extends DDDSuper(I18NMixin(LitElement)) {
     return html`
       <div class="top-row-wrapper">
         <a href="/game-of-throwers/home" title="Home Button" @click=${this._goHome}>
-          <img class="home-image" src="/public/images/game-of-throws-png.jpg" alt="Game of Throwers Logo">
+          <img class="home-image" src="/images/game-of-throws-png.jpg" alt="Game of Throwers Logo">
         </a>
         
         <div class="nav-buttons">

@@ -37,6 +37,10 @@ export class GameOfThrowersWebsiteAboutScreen extends DDDSuper(I18NMixin(LitElem
     css`
       :host {
         display: block;
+        color: light-dark (
+          var(--ddd-theme-default-black),
+          var(--ddd-theme-default-white)
+        );
       }
 
       .title {

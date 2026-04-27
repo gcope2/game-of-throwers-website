@@ -39,10 +39,10 @@ export class GameOfThrowersWebsiteWelcome extends DDDSuper(I18NMixin(LitElement)
 
       .second-block-wrapper {
         background-color: black !important;
-        color: white;
         height: 600px;
         padding-top: 20px;
         padding-bottom: 80px;
+        color: var(--ddd-theme-default-white);
       }
       .about-title {
         display: flex;

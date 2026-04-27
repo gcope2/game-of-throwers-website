@@ -29,7 +29,7 @@ export class GameOfThrowersWebsite extends DDDSuper(I18NMixin(LitElement)) {
     this.currentScreen = 'home';
 
     if (window.location.pathname === '/' || window.location.pathname === '') {
-      window.history.replaceState({}, '', '/game-of-throwers/home');
+      window.history.replaceState({}, '', '?page=home');
     }
     
     this._handleRouteChange();
@@ -50,7 +50,6 @@ export class GameOfThrowersWebsite extends DDDSuper(I18NMixin(LitElement)) {
     css`
       :host {
         display: block;
-        min-height: 100vh;
       }
     `];
   }
@@ -76,10 +75,10 @@ export class GameOfThrowersWebsite extends DDDSuper(I18NMixin(LitElement)) {
     this.currentScreen = screen;
 
     const paths = {
-      home: '/game-of-throwers/home',
-      schedule: '/game-of-throwers/schedule',
-      team: '/game-of-throwers/team',
-      about: '/game-of-throwers/about'
+      home: '?page=home',
+      schedule: '?page=schedule',
+      team: '?page=team',
+      about: '?page=about'
     };
 
     window.history.pushState({}, '', paths[screen]);
@@ -87,11 +86,11 @@ export class GameOfThrowersWebsite extends DDDSuper(I18NMixin(LitElement)) {
 
   _handleRouteChange() {
     const path = window.location.pathname;
-    if (path.includes('/schedule')) {
+    if (path.includes('schedule')) {
       this.currentScreen = 'schedule';
-    } else if (path.includes('/team')) {
+    } else if (path.includes('team')) {
       this.currentScreen = 'team';
-    } else if (path.includes('/about')) {
+    } else if (path.includes('about')) {
       this.currentScreen = 'about';
     } else {
       this.currentScreen = 'home';

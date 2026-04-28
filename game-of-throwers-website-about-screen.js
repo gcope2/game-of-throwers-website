@@ -101,7 +101,7 @@ export class GameOfThrowersWebsiteAboutScreen extends DDDSuper(I18NMixin(LitElem
         <p>Here's a high-level look at how our year usually flows (dates can shift slightly year to year):</p>
         <ul class="season-list">
           <li>Winter (November-Early March): Indoor training focus, technique work, and strength building. Local and regional indoor meets.</li>
-          <li>Spring (Late March-May): Outdoor season ramps up — more frequent competitions and heavy throwing sessions.</li>\
+          <li>Spring (Late March-May): Outdoor season ramps up — more frequent competitions and heavy throwing sessions.</li>
           <li>Summer/Fall (June-October): Peak throwing season with bigger meets, possible travel competitions, and summer training blocks.</li>
           <li>Registration: New throwers can join at the start of each training block. No formal tryouts — just come ready to throw!</li>
         </ul>

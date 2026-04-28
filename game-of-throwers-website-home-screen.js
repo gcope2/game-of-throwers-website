@@ -9,7 +9,7 @@ import "./game-of-throwers-website-arrows.js";
 import "./game-of-throwers-website-title.js";
 import "./game-of-throwers-website-footer.js";
 import "./game-of-throwers-website-welcome.js";
-import "./game-of-throwers-website-home-about-content.js";
+import "./game-of-throwers-website-content.js";
 import images from "./data.js";
 
 /**

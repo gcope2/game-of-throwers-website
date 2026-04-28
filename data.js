@@ -31,8 +31,6 @@ const images = [
   }
 ];
 
-export default images;
-
 const rosterImages = [
   {
     url: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Tomasz_Majewski_-_2._Memoria%C5%82_Kamili_Skolimowskiej_-_Warszawa%2C_2011-09-20.jpg/1280px-Tomasz_Majewski_-_2._Memoria%C5%82_Kamili_Skolimowskiej_-_Warszawa%2C_2011-09-20.jpg",
@@ -126,8 +124,6 @@ const rosterImages = [
   }
 ];
 
-export { rosterImages, coaches };
-
 const coaches = [
   {
     url: "https://img.olympics.com/images/image/private/t_s_pog_staticContent_hero_md_2x/f_auto/primary/zrci9rhqryhsq88dibea",
@@ -145,3 +141,6 @@ const coaches = [
     title: "Strength Coach"
   }
 ];
+
+export { rosterImages, coaches };
+export default images;

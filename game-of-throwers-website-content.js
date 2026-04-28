@@ -7,12 +7,12 @@ import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
 import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
 
 /**
- * `game-of-throwers-website-home-about-content`
+ * `game-of-throwers-website-content`
  * 
  * @demo index.html
- * @element game-of-throwers-website-home-about-content
+ * @element game-of-throwers-website-content
  */
-export class GameOfThrowersWebsiteHomeAboutContent extends DDDSuper(I18NMixin(LitElement)) {
+export class GameOfThrowersWebsiteContent extends DDDSuper(I18NMixin(LitElement)) {
 
   static get tag() {
     return "game-of-throwers-website-content";
@@ -75,4 +75,4 @@ export class GameOfThrowersWebsiteHomeAboutContent extends DDDSuper(I18NMixin(Li
   }
 }
 
-globalThis.customElements.define(GameOfThrowersWebsiteHomeAboutContent.tag, GameOfThrowersWebsiteHomeAboutContent);
+globalThis.customElements.define(GameOfThrowersWebsiteContent.tag, GameOfThrowersWebsiteContent);

@@ -28,10 +28,6 @@ export class GameOfThrowersWebsite extends DDDSuper(I18NMixin(LitElement)) {
     super();
     this.currentScreen = 'home';
 
-    if (window.location.pathname === '/' || window.location.pathname === '') {
-      window.history.replaceState({}, '', '?page=home');
-    }
-    
     this._handleRouteChange();
     window.addEventListener('popstate', () => this._handleRouteChange());
   }
@@ -70,33 +66,23 @@ export class GameOfThrowersWebsite extends DDDSuper(I18NMixin(LitElement)) {
   `;
   }
 
-  _handleNavigation(e) {
-    const screen = e.detail.screen;
-    this.currentScreen = screen;
-
-    const paths = {
-      home: '?page=home',
-      schedule: '?page=schedule',
-      team: '?page=team',
-      about: '?page=about'
-    };
-
-    window.history.pushState({}, '', paths[screen]);
-  }
-
   _handleRouteChange() {
-    const path = window.location.pathname;
-    if (path.includes('schedule')) {
-      this.currentScreen = 'schedule';
-    } else if (path.includes('team')) {
-      this.currentScreen = 'team';
-    } else if (path.includes('about')) {
-      this.currentScreen = 'about';
+    const params = new URLSearchParams(window.location.search);
+    const page = params.get('page');
+
+    if (page && ['home', 'schedule', 'team', 'about'].includes(page)) {
+      this.currentScreen = page;
     } else {
       this.currentScreen = 'home';
+      window.history.replaceState({}, '', '?page=home');
     }
   }
 
+  _handleNavigation(e) {
+    const screen = e.detail.screen;
+    this.currentScreen = screen;
+    window.history.pushState({}, '', `?page=${screen}`);
+  }
 }
 
 globalThis.customElements.define(GameOfThrowersWebsite.tag, GameOfThrowersWebsite);

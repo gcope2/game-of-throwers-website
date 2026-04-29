@@ -51,17 +51,19 @@ export class GameOfThrowersWebsiteArrows extends DDDSuper(I18NMixin(LitElement))
       }
 
       button {
-        cursor: pointer;
-        background-color: var(--ddd-theme-default-potential0);
+        background: transparent;
+        color: black;
         border: solid black;
-        font-weight: var(--ddd-font-weight-bold);
+        width: 50px;
+        height: 50px;
         border-radius: 50%;
-        font-size: var(--ddd-font-size-xlarge);
-        height: 40px;
-        width: 40px;
+        font-size: 32px;
+        cursor: pointer;
+        transition: all 0.2s;
       }
       button:hover {
-        opacity: 0.65;
+        transform: scale(1.1);
+        opacity: 0.5;
       }
     `];
   }

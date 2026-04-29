@@ -94,7 +94,7 @@ export class GameOfThrowersWebsiteCards extends DDDSuper(I18NMixin(LitElement)) 
   render() {
     return html`
     <div class="athlete-card">
-      <img class="athlete-image" src="${this.url}" alt="${this.name}">
+      <img title="${this.name}, ${this.event}, ${this.pr}" class="athlete-image" src="${this.url}" alt="${this.name}">
         <div class="athlete-info">
           <div class="athlete-name">${this.name}</div>
           <div class="athlete-event">${this.event}</div>

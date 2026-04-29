@@ -11,6 +11,8 @@ import "./game-of-throwers-website-schedule-screen.js";
 import "./game-of-throwers-website-team-screen.js";
 import "./game-of-throwers-website-nav.js";
 import "./game-of-throwers-website-footer.js";
+import "./game-of-throwers-website-schedule-comp-screen.js";
+import "./game-of-throwers-website-schedule-practice-screen.js";
 
 /**
  * `game-of-throwers-website`
@@ -58,6 +60,8 @@ export class GameOfThrowersWebsite extends DDDSuper(I18NMixin(LitElement)) {
       <div>
         ${this.currentScreen === 'home' ? html`<game-of-throwers-website-home-screen></game-of-throwers-website-home-screen>` : ''}
         ${this.currentScreen === 'schedule' ? html`<game-of-throwers-website-schedule-screen></game-of-throwers-website-schedule-screen>` : ''}
+        ${this.currentScreen === 'comps' ? html`<game-of-throwers-website-schedule-comp-screen></game-of-throwers-website-schedule-comp-screen>` : ''}
+        ${this.currentScreen === 'practices' ? html`<game-of-throwers-website-schedule-practice-screen></game-of-throwers-website-schedule-practice-screen>` : ''}
         ${this.currentScreen === 'team' ? html`<game-of-throwers-website-team-screen></game-of-throwers-website-team-screen>` : ''}
         ${this.currentScreen === 'about' ? html`<game-of-throwers-website-about-screen></game-of-throwers-website-about-screen>` : ''}
       </div>
@@ -70,7 +74,7 @@ export class GameOfThrowersWebsite extends DDDSuper(I18NMixin(LitElement)) {
     const params = new URLSearchParams(window.location.search);
     const page = params.get('page');
 
-    if (page && ['home', 'schedule', 'team', 'about'].includes(page)) {
+    if (page && ['home', 'schedule', 'comps', 'practices', 'team', 'about'].includes(page)) {
       this.currentScreen = page;
     } else {
       this.currentScreen = 'home';

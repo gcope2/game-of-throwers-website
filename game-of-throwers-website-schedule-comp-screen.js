@@ -9,27 +9,38 @@ import scheduleData from "./schedule-data.js";
 import "./game-of-throwers-website-title.js";
 
 /**
- * `game-of-throwers-website-schedule-screen`
+ * `game-of-throwers-website-schedule-comp-screen`
  * 
  * @demo index.html
- * @element game-of-throwers-website-schedule-screen
+ * @element game-of-throwers-website-schedule-comp-screen
  */
-export class GameOfThrowersWebsiteScheduleScreen extends DDDSuper(I18NMixin(LitElement)) {
+export class GameOfThrowersWebsiteScheduleCompScreen extends DDDSuper(I18NMixin(LitElement)) {
 
   static get tag() {
-    return "game-of-throwers-website-schedule-screen";
+    return "game-of-throwers-website-schedule-comp-screen";
   }
 
   constructor() {
     super();
-    this.currentDateIndex = 1;
+    this.compDates = this._getCompetitionDates();
+    this.currentCompIndex = 0;
+  }
+
+  _getCompetitionDates() {
+    return scheduleData
+      .filter(day => day.events.some(e => e.isComp === true))
+      .map(day => ({
+        date: day.date,
+        events: day.events.filter(e => e.isComp === true)
+      }));
   }
 
   // Lit reactive properties
   static get properties() {
     return {
       ...super.properties,
-      currentDateIndex: { type: Number },
+      currentCompIndex: { type: Number },
+      compDates: { type: Array },
     };
   }
 
@@ -87,20 +98,6 @@ export class GameOfThrowersWebsiteScheduleScreen extends DDDSuper(I18NMixin(LitE
         transform: none;
       }
 
-      .today {
-        background: black;
-        color: white;
-        border: 4px solid gold;
-        padding: 12px 60px;
-        font-size: 26px;
-        font-weight: bold;
-        border-radius: 9999px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 55px;
-      }
-
       table {
         width: 100%;
         table-layout: fixed;
@@ -126,7 +123,7 @@ export class GameOfThrowersWebsiteScheduleScreen extends DDDSuper(I18NMixin(LitE
       th:first-child, td:first-child { width: 18%; }
       th:nth-child(2), td:nth-child(2) { width: 18%; }
       th:nth-child(3), td:nth-child(3) { width: 27%; }
-      th:last-child, td:last-child { width: 37%; }
+      th:last-child, td:last-child { width: 36%; }
 
       td {
         border-top: 1px solid #ddd;
@@ -141,20 +138,26 @@ export class GameOfThrowersWebsiteScheduleScreen extends DDDSuper(I18NMixin(LitE
 
   // Lit render the HTML
   render() {
-    const current = scheduleData[this.currentDateIndex] || { date: "No Date Available", events: [] };
-    const isFirst = this.currentDateIndex === 0;
-    const isLast = this.currentDateIndex === scheduleData.length - 1;
+    if (this.compDates.length === 0) {
+      return html`
+        <div class="container">
+          <game-of-throwers-website-title title="Competition Schedule"></game-of-throwers-website-title>
+          <p>No competitions scheduled yet.</p>
+        </div>
+      `;
+    }
+
+    const current = this.compDates[this.currentCompIndex];
 
     return html`
       <div class="container">
-        <game-of-throwers-website-title title="Full Schedule"></game-of-throwers-website-title>
+        <game-of-throwers-website-title title="Competition Schedule"></game-of-throwers-website-title>
 
         <div class="date" title="${current.date}">${current.date}</div>
 
         <div class="nav-controls">
-          <button title="Back Button" ?disabled=${isFirst} @click=${this._prev}>‹</button>
-          <button class="today" title="Today Button" @click=${this._today}>Today</button>
-          <button title="Next Button" ?disabled=${isLast} @click=${this._next}>›</button>
+          <button title="Back Button" ?disabled=${this.currentCompIndex === 0} @click=${this._prev}>‹</button>
+          <button title="Next Button" ?disabled=${this.currentCompIndex === this.compDates.length - 1} @click=${this._next}>›</button>
         </div>
 
         <table>
@@ -181,22 +184,22 @@ export class GameOfThrowersWebsiteScheduleScreen extends DDDSuper(I18NMixin(LitE
   `;
   }
 
-  _prev() {
-    if (this.currentDateIndex > 0) {
-      this.currentDateIndex--;
+ _prev() {
+    if (this.currentCompIndex > 0) {
+      this.currentCompIndex--;
     }
   }
 
   _next() {
-    if (this.currentDateIndex < scheduleData.length - 1) {
-      this.currentDateIndex++;
+    if (this.currentCompIndex < this.compDates.length - 1) {
+      this.currentCompIndex++;
     }
   }
 
   _today() {
-    this.currentDateIndex = 1;
+    this.currentCompIndex = 0;
   }
 
 }
 
-globalThis.customElements.define(GameOfThrowersWebsiteScheduleScreen.tag, GameOfThrowersWebsiteScheduleScreen);
+globalThis.customElements.define(GameOfThrowersWebsiteScheduleCompScreen.tag, GameOfThrowersWebsiteScheduleCompScreen);

@@ -110,19 +110,19 @@ export class GameOfThrowersWebsiteNav extends DDDSuper(I18NMixin(LitElement)) {
   render() {
     return html`
       <div class="top-row-wrapper">
-        <a href="?page=home" @click=${this._goHome}>
+        <a title="Home Button" href="?page=home" @click=${this._goHome}>
           <img class="home-image" src="/images/game-of-throws-png.jpg" alt="Game of Throwers Logo">
         </a>
 
         <div class="nav-buttons">
           ${this.navItems.map(item => html`
             <div class="nav-item">
-              <span @click=${() => this._navigateTo(item.slug)}>${item.title}</span>
+              <span title="${item.title}" @click=${() => this._navigateTo(item.slug)}>${item.title}</span>
               
               ${item.children ? html`
                 <div class="dropdown">
                   ${item.children.map(child => html`
-                    <a href="?page=${child.slug}" 
+                    <a title="${child.title}" href="?page=${child.slug}" 
                        @click=${(e) => this._navigateTo(child.slug, e)}>
                       ${child.title}
                     </a>

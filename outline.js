@@ -14,8 +14,8 @@ export default {
       location: "?page=schedule",
       children: [
         { id: "schedule-main", title: "Full Schedule", slug: "schedule" },
-        { id: "comps", title: "Competitions", slug: "schedule" },
-        { id: "practice", title: "Practice Schedule", slug: "schedule" },
+        { id: "comps", title: "Competition Schedule", slug: "comps" },
+        { id: "practices", title: "Practice Schedule", slug: "practices" },
       ]
     },
     {

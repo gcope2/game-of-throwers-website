@@ -5,7 +5,6 @@
 import { LitElement, html, css } from "lit";
 import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
 import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
-import scheduleData from "./schedule-data.js";
 import "./game-of-throwers-website-title.js";
 
 /**
@@ -23,6 +22,8 @@ export class GameOfThrowersWebsiteScheduleScreen extends DDDSuper(I18NMixin(LitE
   constructor() {
     super();
     this.currentDateIndex = 1;
+    this.scheduleData = [];
+    this._loadSchedule();
   }
 
   // Lit reactive properties
@@ -30,7 +31,20 @@ export class GameOfThrowersWebsiteScheduleScreen extends DDDSuper(I18NMixin(LitE
     return {
       ...super.properties,
       currentDateIndex: { type: Number },
+      scheduleData: { type: Array },
     };
+  }
+
+  async _loadSchedule() {
+    try {
+      const res = await fetch('/api/schedule');
+      if (res.ok) {
+        this.scheduleData = await res.json();
+      }
+    } catch (e) {
+      console.error("Failed to load schedule", e);
+    }
+    this.requestUpdate();
   }
 
   // Lit scoped styles
@@ -141,19 +155,28 @@ export class GameOfThrowersWebsiteScheduleScreen extends DDDSuper(I18NMixin(LitE
 
   // Lit render the HTML
   render() {
-    const current = scheduleData[this.currentDateIndex] || { date: "No Date Available", events: [] };
+    if (this.scheduleData.length === 0) {
+      return html`
+        <div class="container">
+          <game-of-throwers-website-title title="Full Schedule"></game-of-throwers-website-title>
+          <p style="text-align:center; font-size:24px;">Loading full schedule...</p>
+        </div>
+      `;
+    }
+
+    const current = this.scheduleData[this.currentDateIndex] || { date: "No Date", events: [] };
     const isFirst = this.currentDateIndex === 0;
-    const isLast = this.currentDateIndex === scheduleData.length - 1;
+    const isLast = this.currentDateIndex === this.scheduleData.length - 1;
 
     return html`
       <div class="container">
         <game-of-throwers-website-title title="Full Schedule"></game-of-throwers-website-title>
 
-        <div class="date" title="${current.date}">${current.date}</div>
+        <div title="${current.date}" class="date">${current.date}</div>
 
         <div class="nav-controls">
           <button title="Back Button" ?disabled=${isFirst} @click=${this._prev}>‹</button>
-          <button class="today" title="Today Button" @click=${this._today}>Today</button>
+          <button title="Today Button" class="today" @click=${this._today}>Today</button>
           <button title="Next Button" ?disabled=${isLast} @click=${this._next}>›</button>
         </div>
 
@@ -178,18 +201,18 @@ export class GameOfThrowersWebsiteScheduleScreen extends DDDSuper(I18NMixin(LitE
           </tbody>
         </table>
       </div>
-  `;
+    `;
   }
 
-  _prev() {
+  _prev() { 
     if (this.currentDateIndex > 0) {
-      this.currentDateIndex--;
+      this.currentDateIndex--; 
     }
   }
 
-  _next() {
-    if (this.currentDateIndex < scheduleData.length - 1) {
-      this.currentDateIndex++;
+  _next() { 
+    if (this.currentDateIndex < this.scheduleData.length - 1) {
+      this.currentDateIndex++; 
     }
   }
 

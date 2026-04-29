@@ -5,7 +5,6 @@
 import { LitElement, html, css } from "lit";
 import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
 import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
-import outline from "./outline.js";
 
 export class GameOfThrowersWebsiteNav extends DDDSuper(I18NMixin(LitElement)) {
 
@@ -22,7 +21,22 @@ export class GameOfThrowersWebsiteNav extends DDDSuper(I18NMixin(LitElement)) {
 
   constructor() {
     super();
-    this.navItems = outline.items.filter(item => item.id !== "home");
+    this.navItems = [];
+    this._loadMenu();
+  }
+
+  async _loadMenu() {
+    try {
+      const res = await fetch('/api/menu');
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      
+      const data = await res.json();
+      this.navItems = data.items.filter(item => item.id !== "home");
+      this.requestUpdate();
+    } catch (e) {
+      console.error("Failed to load menu", e);
+      this.navItems = []; // stay empty so you see the error clearly
+    }
   }
 
   static get styles() {
@@ -117,12 +131,12 @@ export class GameOfThrowersWebsiteNav extends DDDSuper(I18NMixin(LitElement)) {
         <div class="nav-buttons">
           ${this.navItems.map(item => html`
             <div class="nav-item">
-              <span title="${item.title}" @click=${() => this._navigateTo(item.slug)}>${item.title}</span>
+              <span title="${item.title} Button" @click=${() => this._navigateTo(item.slug)}>${item.title}</span>
               
               ${item.children ? html`
                 <div class="dropdown">
                   ${item.children.map(child => html`
-                    <a title="${child.title}" href="?page=${child.slug}" 
+                    <a title="${child.title} Button" href="?page=${child.slug}" 
                        @click=${(e) => this._navigateTo(child.slug, e)}>
                       ${child.title}
                     </a>

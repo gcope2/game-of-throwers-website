@@ -88,7 +88,7 @@ export class GameOfThrowersWebsiteCoachCards extends DDDSuper(I18NMixin(LitEleme
   render() {
     return html`
     <div class="coach-card">
-        <img title="${this.name}, ${this.title}" class="coach-image" src="${this.url || ''}" alt="${this.name}">
+        <img title="${this.name}, ${this.title}" class="coach-image" src="${this.url || ''}" alt="${this.name}" loading="lazy">
         <div class="coach-info">
           <div class="coach-name">${this.name}</div>
           <div class="coach-title">${this.title}</div>

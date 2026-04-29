@@ -5,7 +5,6 @@
 import { LitElement, html, css } from "lit";
 import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
 import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
-import scheduleData from "./schedule-data.js";
 import "./game-of-throwers-website-title.js";
 
 /**
@@ -22,17 +21,9 @@ export class GameOfThrowersWebsiteScheduleCompScreen extends DDDSuper(I18NMixin(
 
   constructor() {
     super();
-    this.compDates = this._getCompetitionDates();
     this.currentCompIndex = 0;
-  }
-
-  _getCompetitionDates() {
-    return scheduleData
-      .filter(day => day.events.some(e => e.isComp === true))
-      .map(day => ({
-        date: day.date,
-        events: day.events.filter(e => e.isComp === true)
-      }));
+    this.compDates = [];
+    this._loadSchedule();
   }
 
   // Lit reactive properties
@@ -42,6 +33,24 @@ export class GameOfThrowersWebsiteScheduleCompScreen extends DDDSuper(I18NMixin(
       currentCompIndex: { type: Number },
       compDates: { type: Array },
     };
+  }
+
+  async _loadSchedule() {
+    try {
+      const res = await fetch('/api/schedule');
+      if (res.ok) {
+        const allData = await res.json();
+        this.compDates = allData
+          .filter(day => day.events.some(e => e.isComp === true))
+          .map(day => ({
+            date: day.date,
+            events: day.events.filter(e => e.isComp === true)
+          }));
+      }
+    } catch (e) {
+      console.error("Failed to load comp schedule", e);
+    }
+    this.requestUpdate();
   }
 
   // Lit scoped styles
@@ -142,7 +151,7 @@ export class GameOfThrowersWebsiteScheduleCompScreen extends DDDSuper(I18NMixin(
       return html`
         <div class="container">
           <game-of-throwers-website-title title="Competition Schedule"></game-of-throwers-website-title>
-          <p>No competitions scheduled yet.</p>
+          <p style="text-align:center; font-size:24px;">Loading competition schedule...</p>
         </div>
       `;
     }
@@ -153,7 +162,7 @@ export class GameOfThrowersWebsiteScheduleCompScreen extends DDDSuper(I18NMixin(
       <div class="container">
         <game-of-throwers-website-title title="Competition Schedule"></game-of-throwers-website-title>
 
-        <div class="date" title="${current.date}">${current.date}</div>
+        <div title="${current.date}" class="date">${current.date}</div>
 
         <div class="nav-controls">
           <button title="Back Button" ?disabled=${this.currentCompIndex === 0} @click=${this._prev}>‹</button>
@@ -174,30 +183,26 @@ export class GameOfThrowersWebsiteScheduleCompScreen extends DDDSuper(I18NMixin(
               <tr>
                 <td title="From: ${event.from}">${event.from}</td>
                 <td title="To: ${event.to}">${event.to}</td>
-                <td title="Type: ${event.type}" class="${event.isComp ? 'comp' : ''}">${event.type}</td>
+                <td title="Type: ${event.type}" class="comp">${event.type}</td>
                 <td title="Team: ${event.team}">${event.team}</td>
               </tr>
             `)}
           </tbody>
         </table>
       </div>
-  `;
+    `;
   }
 
- _prev() {
+  _prev() { 
     if (this.currentCompIndex > 0) {
-      this.currentCompIndex--;
+      this.currentCompIndex--; 
     }
   }
 
-  _next() {
+  _next() { 
     if (this.currentCompIndex < this.compDates.length - 1) {
-      this.currentCompIndex++;
+      this.currentCompIndex++; 
     }
-  }
-
-  _today() {
-    this.currentCompIndex = 0;
   }
 
 }

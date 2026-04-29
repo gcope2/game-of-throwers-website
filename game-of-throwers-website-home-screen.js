@@ -28,6 +28,7 @@ export class GameOfThrowersWebsiteHomeScreen extends DDDSuper(I18NMixin(LitEleme
     super();
     this.images = images;
     this.currentImageIndex = 0;
+    this.autoPlayInterval = null;
   }
 
   // Lit reactive properties
@@ -61,7 +62,8 @@ export class GameOfThrowersWebsiteHomeScreen extends DDDSuper(I18NMixin(LitEleme
         min-height: 400px;
         max-width: 600px;
         border-radius: 10px;
-        transition: filter 0.3s ease;
+        transition: opacity 3s ease-in-out;
+        opacity: 1;
       }
       .carousel-image:hover {
         filter: drop-shadow(0 0 5px black);
@@ -80,7 +82,7 @@ export class GameOfThrowersWebsiteHomeScreen extends DDDSuper(I18NMixin(LitEleme
       <game-of-throwers-website-title title="Welcome to the Game of Throws League!"></game-of-throwers-website-title>
 
         <div class="image-frame">
-          <img class="carousel-image" src="${this.currentImage.url}" alt="Throwers image ${this.currentImageIndex + 1}">
+          <img class="carousel-image" src="${this.currentImage.url}" alt="${this.currentImage.alt}" loading="lazy">
         </div>
 
         <game-of-throwers-website-arrows
@@ -99,15 +101,45 @@ export class GameOfThrowersWebsiteHomeScreen extends DDDSuper(I18NMixin(LitEleme
   }
 
   get currentImage() {
-    return this.images?.[this.currentImageIndex] || { url: "" };
+    return this.images?.[this.currentImageIndex] || { url: "", alt: "" };
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this._startAutoPlay();
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this._stopAutoPlay();
+  }
+
+  _startAutoPlay() {
+    this._stopAutoPlay();
+    this.autoPlayInterval = setInterval(() => {
+      this._onNextClick();
+    }, 5000);
+  }
+
+  _stopAutoPlay() {
+    if (this.autoPlayInterval) {
+      clearInterval(this.autoPlayInterval);
+      this.autoPlayInterval = null;
+    }
   }
 
   _onPrevClick() {
-    this.currentImageIndex = this.currentImageIndex === 0 ? this.images.length - 1 : this.currentImageIndex - 1;
+    this.currentImageIndex = this.currentImageIndex === 0 
+      ? this.images.length - 1 
+      : this.currentImageIndex - 1;
+    this._startAutoPlay();
   }
 
   _onNextClick() {
-    this.currentImageIndex = this.currentImageIndex === this.images.length - 1 ? 0 : this.currentImageIndex + 1;
+    this.currentImageIndex = this.currentImageIndex === this.images.length - 1 
+      ? 0 
+      : this.currentImageIndex + 1;
+    this._startAutoPlay();
   }
 
 }

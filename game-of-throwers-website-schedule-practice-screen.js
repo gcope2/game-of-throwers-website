@@ -5,7 +5,6 @@
 import { LitElement, html, css } from "lit";
 import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
 import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
-import scheduleData from "./schedule-data.js";
 import "./game-of-throwers-website-title.js";
 
 /**
@@ -22,17 +21,9 @@ export class GameOfThrowersWebsiteSchedulePracticeScreen extends DDDSuper(I18NMi
 
   constructor() {
     super();
-    this.practiceDates = this._getPracticeDates();
     this.currentPracticeIndex = 1;
-  }
-
-  _getPracticeDates() {
-    return scheduleData
-      .filter(day => day.events.some(e => !e.isComp)) // Only days with practices
-      .map(day => ({
-        date: day.date,
-        events: day.events.filter(e => !e.isComp) // Only practice events
-      }));
+    this.practiceDates = [];
+    this._loadSchedule();
   }
 
   // Lit reactive properties
@@ -42,6 +33,25 @@ export class GameOfThrowersWebsiteSchedulePracticeScreen extends DDDSuper(I18NMi
       currentPracticeIndex: { type: Number },
       practiceDates: { type: Array },
     };
+  }
+
+  async _loadSchedule() {
+    try {
+      const res = await fetch('/api/schedule');
+      if (res.ok) {
+        const allData = await res.json();
+        
+        this.practiceDates = allData
+          .filter(day => day.events.some(e => !e.isComp))
+          .map(day => ({
+            date: day.date,
+            events: day.events.filter(e => !e.isComp)
+          }));
+      }
+    } catch (e) {
+      console.error("Failed to load practice schedule", e);
+    }
+    this.requestUpdate();
   }
 
   // Lit scoped styles
@@ -136,8 +146,8 @@ export class GameOfThrowersWebsiteSchedulePracticeScreen extends DDDSuper(I18NMi
     if (this.practiceDates.length === 0) {
       return html`
         <div class="container">
-          <game-of-throwers-website-title title="Practices"></game-of-throwers-website-title>
-          <p style="text-align:center; font-size:24px;">No practices scheduled.</p>
+          <game-of-throwers-website-title title="Practice Schedule"></game-of-throwers-website-title>
+          <p style="text-align:center; font-size:24px;">Loading practice schedule...</p>
         </div>
       `;
     }
@@ -176,7 +186,7 @@ export class GameOfThrowersWebsiteSchedulePracticeScreen extends DDDSuper(I18NMi
           </tbody>
         </table>
       </div>
-  `;
+    `;
   }
 
  _prev() {
@@ -185,10 +195,6 @@ export class GameOfThrowersWebsiteSchedulePracticeScreen extends DDDSuper(I18NMi
 
   _next() {
     if (this.currentPracticeIndex < this.practiceDates.length - 1) this.currentPracticeIndex++;
-  }
-
-  _today() {
-    this.currentPracticeIndex = 1;
   }
 
 }

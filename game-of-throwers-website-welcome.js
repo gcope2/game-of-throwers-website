@@ -53,6 +53,7 @@ export class GameOfThrowersWebsiteWelcome extends DDDSuper(I18NMixin(LitElement)
         display: flex;
         gap: 100px;
         padding-left: 50px;
+        max-height: 550px;
       }
       .about-image {
         padding-left: var(--ddd-spacing-12);
@@ -68,6 +69,12 @@ export class GameOfThrowersWebsiteWelcome extends DDDSuper(I18NMixin(LitElement)
       .about-text {
         max-width: 1000px;
         font-size: 27px;
+        line-height: 1.45;
+        max-height: 515px;
+        overflow-y: auto;
+        padding-right: 20px;
+        scrollbar-width: thin;
+        scrollbar-color: gold #333;
       }
     `];
   }
@@ -79,7 +86,7 @@ export class GameOfThrowersWebsiteWelcome extends DDDSuper(I18NMixin(LitElement)
         <h1 class="about-title">About Game of Throws</h1>
 
         <div class="about-row">
-          <img class="about-image" src="/images/game-of-throws-logo.jpg" alt="Game of Throwers Logo">
+          <img class="about-image" src="/images/game-of-throws-logo.jpg" alt="Game of Throws Official Logo" loading="lazy">
           
           <div class="about-text">
             <p>Game of Throws is a throws-only track & field club dedicated to the shot put, discus, hammer, and javelin. We bring together throwers of all ages and levels who want to get stronger, throw farther, and have a blast doing it.</p>

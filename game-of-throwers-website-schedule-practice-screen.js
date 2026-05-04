@@ -60,10 +60,12 @@ export class GameOfThrowersWebsiteSchedulePracticeScreen extends DDDSuper(I18NMi
     css`
       :host {
         display: block;
-        background-color: gold;
         min-height: 800px;
         padding: 40px 20px 100px;
-        color: black;
+        color: light-dark (
+          var(--ddd-theme-default-black),
+          var(--ddd-theme-default-white)
+        );
       }
 
       .container {

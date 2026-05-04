@@ -47,7 +47,7 @@ export class GameOfThrowersWebsiteContent extends DDDSuper(I18NMixin(LitElement)
         list-style-type: disc;
       }
       ul li::marker {
-        color: var(--ddd-color-black);
+        color: var(--ddd-theme-default-black);
       }
     `];
   }

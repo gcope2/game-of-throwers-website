@@ -49,7 +49,7 @@ export class GameOfThrowersWebsiteCards extends DDDSuper(I18NMixin(LitElement)) 
         display: flex;
         flex-direction: column;
         align-items: center;
-        background: var(--ddd-color-white);
+        background: var(--ddd-theme-default-white);
         border-radius: 12px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         overflow: hidden;
@@ -73,7 +73,7 @@ export class GameOfThrowersWebsiteCards extends DDDSuper(I18NMixin(LitElement)) 
       .athlete-name {
         font-size: 22px;
         font-weight: bold;
-        color: var(--ddd-color-black);
+        color: var(--ddd-theme-default-black);
         margin-bottom: 8px;
       }
       .athlete-event {

@@ -49,7 +49,7 @@ export class GameOfThrowersWebsiteAboutTitleBlocks extends DDDSuper(I18NMixin(Li
         padding-inline-end: 20px;
     }
       .left-line, .right-line {
-        color: var(--color-black);
+        color: var(--ddd-theme-default-black);
         flex: 1;
         height: 2px;
         margin-top: 20px;

@@ -45,7 +45,7 @@ export class GameOfThrowersWebsiteTitle extends DDDSuper(I18NMixin(LitElement)) 
       }
       h1 {
         color: var(--ddd-color-black);
-        font-size: 2.5rem;
+        font-size: 40px;
         margin: 0;
         font-weight: 700;
       }

@@ -36,7 +36,7 @@ export class GameOfThrowersWebsiteFooter extends DDDSuper(I18NMixin(LitElement))
       :host {
         display: block;
         background-color: black !important;
-        color: white;
+        color: var(--ddd-theme-default-white);
         width: 100%;
       }
 
@@ -51,13 +51,13 @@ export class GameOfThrowersWebsiteFooter extends DDDSuper(I18NMixin(LitElement))
       }
 
       .links-wrapper {
-        color: var(--ddd-color-white);
+        color: var(--ddd-theme-default-white);
         display: flex;
         gap: var(--ddd-spacing-10);
         padding-right: var(--ddd-spacing-12);
       }
       .links-wrapper a {
-        color: var(--ddd-color-white);
+        color: var(--ddd-theme-default-white);
         font-size: 30px;
       }
       .links-wrapper a:hover {

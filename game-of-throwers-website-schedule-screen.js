@@ -106,7 +106,7 @@ export class GameOfThrowersWebsiteScheduleScreen extends DDDSuper(I18NMixin(LitE
       .today {
         background: black;
         color: white;
-        border: 4px solid gold;
+        border: 4px solid black;
         padding: 12px 60px;
         font-size: 26px;
         font-weight: bold;

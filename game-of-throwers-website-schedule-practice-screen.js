@@ -139,6 +139,7 @@ export class GameOfThrowersWebsiteSchedulePracticeScreen extends DDDSuper(I18NMi
 
       td {
         border-top: 1px solid #ddd;
+        color: black;
       }
     `];
   }

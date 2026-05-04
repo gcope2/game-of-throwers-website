@@ -146,6 +146,7 @@ export class GameOfThrowersWebsiteScheduleScreen extends DDDSuper(I18NMixin(LitE
 
       td {
         border-top: 1px solid #ddd;
+        color: black;
       }
 
       .comp {

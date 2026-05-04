@@ -47,7 +47,7 @@ export class GameOfThrowersWebsiteCoachCards extends DDDSuper(I18NMixin(LitEleme
         display: flex;
         flex-direction: column;
         align-items: center;
-        background: var(--ddd-theme-default-white);
+        background: var(--ddd-color-white);
         border-radius: 12px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         overflow: hidden;
@@ -72,7 +72,7 @@ export class GameOfThrowersWebsiteCoachCards extends DDDSuper(I18NMixin(LitEleme
       .coach-name {
         font-size: 22px;
         font-weight: bold;
-        color: var(--ddd-theme-default-black);
+        color: var(--ddd-color-black);
         margin-bottom: 8px;
       }
       .coach-title {

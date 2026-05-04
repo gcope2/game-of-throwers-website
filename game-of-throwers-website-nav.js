@@ -77,7 +77,7 @@ export class GameOfThrowersWebsiteNav extends DDDSuper(I18NMixin(LitElement)) {
 
       .nav-item {
         position: relative;
-        color: var(--ddd-theme-default-white);
+        color: white;
         font-size: 28px;
         cursor: pointer;
         padding: 8px 12px;
@@ -92,7 +92,7 @@ export class GameOfThrowersWebsiteNav extends DDDSuper(I18NMixin(LitElement)) {
         position: absolute;
         top: 100%;
         left: 0;
-        background-color: var(--ddd-theme-default-black);
+        background-color: black;
         border: 2px solid gold;
         border-top: none;
         display: none;
@@ -107,7 +107,7 @@ export class GameOfThrowersWebsiteNav extends DDDSuper(I18NMixin(LitElement)) {
       }
 
       .dropdown a {
-        color: var(--ddd-theme-default-white);
+        color: white;
         padding: 12px 20px;
         text-decoration: none;
         font-size: 22px;
@@ -115,7 +115,7 @@ export class GameOfThrowersWebsiteNav extends DDDSuper(I18NMixin(LitElement)) {
       }
 
       .dropdown a:hover {
-        background-color: var(--ddd-theme-default-black);
+        background-color: #222;
         color: gold;
       }
     `];

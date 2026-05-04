@@ -88,8 +88,8 @@ export class GameOfThrowersWebsiteScheduleCompScreen extends DDDSuper(I18NMixin(
       }
 
       button {
-        background: var(--ddd-theme-default-black);
-        color: var(--ddd-theme-default-white);
+        background: black;
+        color: white;
         border: none;
         width: 50px;
         height: 50px;
@@ -99,12 +99,12 @@ export class GameOfThrowersWebsiteScheduleCompScreen extends DDDSuper(I18NMixin(
         transition: all 0.2s;
       }
       button:hover:not(:disabled) {
-        background: var(--ddd-theme-default-gray);
+        background: #333;
         transform: scale(1.1);
       }
       button:disabled {
-        background: var(--ddd-theme-default-light-gray);
-        color: var(--ddd-theme-default-white);
+        background: #666;
+        color: #aaa;
         cursor: not-allowed;
         transform: none;
       }
@@ -113,7 +113,7 @@ export class GameOfThrowersWebsiteScheduleCompScreen extends DDDSuper(I18NMixin(
         width: 100%;
         table-layout: fixed;
         border-collapse: collapse;
-        background: var(--ddd-theme-default-white);
+        background: white;
         border-radius: 12px;
         overflow: hidden;
         box-shadow: 0 6px 20px rgba(0,0,0,0.15);
@@ -126,8 +126,8 @@ export class GameOfThrowersWebsiteScheduleCompScreen extends DDDSuper(I18NMixin(
       }
 
       th {
-        background: var(--ddd-theme-default-black);
-        color: var(--ddd-theme-default-white);
+        background: black;
+        color: white;
         font-size: 22px;
       }
 
@@ -138,12 +138,12 @@ export class GameOfThrowersWebsiteScheduleCompScreen extends DDDSuper(I18NMixin(
 
       td {
         border-top: 1px solid #ddd;
-        color: var(--ddd-theme-default-black);
+        color: black;
       }
 
       .comp {
         font-weight: bold;
-        color: var(--ddd-theme-default-red);
+        color: red;
       }
     `];
   }

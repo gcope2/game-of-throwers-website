@@ -74,7 +74,7 @@ export class GameOfThrowersWebsiteWelcome extends DDDSuper(I18NMixin(LitElement)
         overflow-y: auto;
         padding-right: 20px;
         scrollbar-width: thin;
-        scrollbar-color: gold gray;
+        scrollbar-color: gold #333;
       }
     `];
   }

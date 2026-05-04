@@ -82,8 +82,8 @@ export class GameOfThrowersWebsiteScheduleScreen extends DDDSuper(I18NMixin(LitE
       }
 
       button {
-        background: var(--ddd-theme-default-black);
-        color: var(--ddd-theme-default-white);
+        background: black;
+        color: white;
         border: none;
         width: 50px;
         height: 50px;
@@ -93,19 +93,19 @@ export class GameOfThrowersWebsiteScheduleScreen extends DDDSuper(I18NMixin(LitE
         transition: all 0.2s;
       }
       button:hover:not(:disabled) {
-        background: var(--ddd-theme-default-gray);
+        background: #333;
         transform: scale(1.1);
       }
       button:disabled {
-        background: var(--ddd-theme-default-light-gray);
-        color: var(--ddd-theme-default-white);
+        background: #666;
+        color: #aaa;
         cursor: not-allowed;
         transform: none;
       }
 
       .today {
-        background: var(--ddd-theme-default-black);
-        color: var(--ddd-theme-default-white);
+        background: black;
+        color: white;
         border: 4px solid black;
         padding: 12px 60px;
         font-size: 26px;
@@ -121,7 +121,7 @@ export class GameOfThrowersWebsiteScheduleScreen extends DDDSuper(I18NMixin(LitE
         width: 100%;
         table-layout: fixed;
         border-collapse: collapse;
-        background: var(--ddd-theme-default-white);
+        background: white;
         border-radius: 12px;
         overflow: hidden;
         box-shadow: 0 6px 20px rgba(0,0,0,0.15);
@@ -134,8 +134,8 @@ export class GameOfThrowersWebsiteScheduleScreen extends DDDSuper(I18NMixin(LitE
       }
 
       th {
-        background: var(--ddd-theme-default-black);
-        color: var(--ddd-theme-default-white);
+        background: black;
+        color: white;
         font-size: 22px;
       }
 
@@ -146,12 +146,12 @@ export class GameOfThrowersWebsiteScheduleScreen extends DDDSuper(I18NMixin(LitE
 
       td {
         border-top: 1px solid #ddd;
-        color: var(--ddd-theme-default-black);
+        color: black;
       }
 
       .comp {
         font-weight: bold;
-        color: var(--ddd-theme-default-red);
+        color: red;
       }
     `];
   }

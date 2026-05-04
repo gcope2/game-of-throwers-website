@@ -65,7 +65,7 @@ export class GameOfThrowersWebsiteAboutScreen extends DDDSuper(I18NMixin(LitElem
         font-size: 25px !important;
       }
       ul li::marker {
-        color: var(--ddd-theme-default-black);
+        color: var(--ddd-color-black);
       }
     `];
   }

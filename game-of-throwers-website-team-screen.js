@@ -40,7 +40,7 @@ export class GameOfThrowersWebsiteTeamScreen extends DDDSuper(I18NMixin(LitEleme
       :host {
         display: block;
         min-height: 850px;
-        background-color: var(--ddd-theme-default-white);
+        background-color: var(--ddd-color-white);
         padding: 40px 20px;
       }
 

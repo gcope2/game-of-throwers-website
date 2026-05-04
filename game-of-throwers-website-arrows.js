@@ -52,7 +52,7 @@ export class GameOfThrowersWebsiteArrows extends DDDSuper(I18NMixin(LitElement))
 
       button {
         background: transparent;
-        color: var(--ddd-theme-default-black);
+        color: black;
         border: solid black;
         width: 50px;
         height: 50px;

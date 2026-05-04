@@ -138,6 +138,7 @@ export class GameOfThrowersWebsiteScheduleCompScreen extends DDDSuper(I18NMixin(
 
       td {
         border-top: 1px solid #ddd;
+        color: black;
       }
 
       .comp {
